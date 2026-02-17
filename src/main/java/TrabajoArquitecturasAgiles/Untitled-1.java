@@ -52,3 +52,22 @@ public class PrincipalApp {
 
         } while (!salir);
     }
+    
+    public static void crearCaja(ArrayList<Caja> supermercado) {
+        System.out.println("Dame el nombre de la caja:");
+        String id = sc.next();
+        System.out.println("Dame el saldo de la caja:");
+        int saldo = sc.nextInt();
+
+        supermercado.add(new Caja(id, saldo));
+    }
+
+    public static void eliminarCaja(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return;
+        }
+
+        int seleccion = seleccionarCajasSupermercado(supermercado);
+        supermercado.remove(seleccion);
+    }
