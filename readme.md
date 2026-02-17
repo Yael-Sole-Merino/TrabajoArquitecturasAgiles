@@ -1,1 +1,1 @@
-Trabajo agiles
+Hemos reliazado el proyecto creando primero el main y el menu de los metodos con sus diferentes ramas y creacion y aceptacion de pull requeast,mas tarde hemos realiazado los metodos con sus commits pull requeast ... de dos en dos para que sea mas sencillo de visualizar e ir añadiendolo al apartado de proyectes
