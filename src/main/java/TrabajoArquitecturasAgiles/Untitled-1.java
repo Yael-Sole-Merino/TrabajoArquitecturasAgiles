@@ -52,3 +52,127 @@ public class PrincipalApp {
 
         } while (!salir);
     }
+    
+    public static void crearCaja(ArrayList<Caja> supermercado) {
+        System.out.println("Dame el nombre de la caja:");
+        String id = sc.next();
+        System.out.println("Dame el saldo de la caja:");
+        int saldo = sc.nextInt();
+
+        supermercado.add(new Caja(id, saldo));
+    }
+
+    public static void eliminarCaja(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return;
+        }
+
+        int seleccion = seleccionarCajasSupermercado(supermercado);
+        supermercado.remove(seleccion);
+    }
+    
+    public static void ingresarDinero(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return;
+        }
+
+        int seleccion = seleccionarCajasSupermercado(supermercado);
+        System.out.println("Dinero a ingresar:");
+        int dinero = sc.nextInt();
+
+        supermercado.get(seleccion).ingresar(dinero);
+    }
+
+    public static void retirarDinero(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return;
+        }
+
+        int seleccion = seleccionarCajasSupermercado(supermercado);
+        System.out.println("Dinero a retirar:");
+        int dinero = sc.nextInt();
+
+        if (dinero <= supermercado.get(seleccion).getSaldo()) {
+            supermercado.get(seleccion).retirar(dinero);
+        } else {
+            System.out.println("Operacion denegada. No hay saldo");
+        }
+    }
+    public static void transferirDinero(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return;
+        }
+
+        System.out.println("Elige la caja a retirar:");
+        int seleccion = seleccionarCajasSupermercado(supermercado);
+
+        System.out.println("Elige la caja a ingresar:");
+        int seleccion2 = seleccionarCajasSupermercado(supermercado);
+
+        System.out.println("Dinero a transferir:");
+        int dinero = sc.nextInt();
+
+        if (dinero <= supermercado.get(seleccion).getSaldo()) {
+            supermercado.get(seleccion).retirar(dinero);
+            supermercado.get(seleccion2).ingresar(dinero);
+        } else {
+            System.out.println("Operacion denegada. No hay saldo");
+        }
+    }
+
+    public static void verSaldoCajas(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return;
+        }
+
+        for (Caja caja : supermercado) {
+            System.out.println(caja.toString());
+        }
+    }
+    public static void imprimirMayorCaja(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return;
+        }
+
+        int max = supermercado.get(0).getSaldo();
+
+        for (Caja caja : supermercado) {
+            if (caja.getSaldo() > max) {
+                max = caja.getSaldo();
+            }
+        }
+
+        System.out.println("La caja con mayor saldo es:");
+
+        for (Caja caja : supermercado) {
+            if (caja.getSaldo() == max) {
+                System.out.println(caja.toString());
+            }
+        }
+    }
+
+    public static boolean salirPrograma() {
+        System.out.println("Adios!!");
+        return true;
+    }
+
+    public static int seleccionarCajasSupermercado(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return -1;
+        }
+
+        for (int i = 0; i < supermercado.size(); i++) {
+            System.out.println(i + ". " + supermercado.get(i).getId());
+        }
+
+        int seleccion = sc.nextInt();
+        return seleccion;
+    }
+}
