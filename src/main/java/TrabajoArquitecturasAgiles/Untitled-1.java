@@ -134,3 +134,45 @@ public class PrincipalApp {
             System.out.println(caja.toString());
         }
     }
+    public static void imprimirMayorCaja(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return;
+        }
+
+        int max = supermercado.get(0).getSaldo();
+
+        for (Caja caja : supermercado) {
+            if (caja.getSaldo() > max) {
+                max = caja.getSaldo();
+            }
+        }
+
+        System.out.println("La caja con mayor saldo es:");
+
+        for (Caja caja : supermercado) {
+            if (caja.getSaldo() == max) {
+                System.out.println(caja.toString());
+            }
+        }
+    }
+
+    public static boolean salirPrograma() {
+        System.out.println("Adios!!");
+        return true;
+    }
+
+    public static int seleccionarCajasSupermercado(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return -1;
+        }
+
+        for (int i = 0; i < supermercado.size(); i++) {
+            System.out.println(i + ". " + supermercado.get(i).getId());
+        }
+
+        int seleccion = sc.nextInt();
+        return seleccion;
+    }
+}
