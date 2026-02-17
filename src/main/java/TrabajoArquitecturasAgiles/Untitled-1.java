@@ -101,3 +101,36 @@ public class PrincipalApp {
             System.out.println("Operacion denegada. No hay saldo");
         }
     }
+    public static void transferirDinero(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return;
+        }
+
+        System.out.println("Elige la caja a retirar:");
+        int seleccion = seleccionarCajasSupermercado(supermercado);
+
+        System.out.println("Elige la caja a ingresar:");
+        int seleccion2 = seleccionarCajasSupermercado(supermercado);
+
+        System.out.println("Dinero a transferir:");
+        int dinero = sc.nextInt();
+
+        if (dinero <= supermercado.get(seleccion).getSaldo()) {
+            supermercado.get(seleccion).retirar(dinero);
+            supermercado.get(seleccion2).ingresar(dinero);
+        } else {
+            System.out.println("Operacion denegada. No hay saldo");
+        }
+    }
+
+    public static void verSaldoCajas(ArrayList<Caja> supermercado) {
+        if (supermercado.isEmpty()) {
+            System.out.println("No hay cajas disponibles");
+            return;
+        }
+
+        for (Caja caja : supermercado) {
+            System.out.println(caja.toString());
+        }
+    }
